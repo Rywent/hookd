@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hookd.API", "Hookd.API\Hookd.API.csproj", "{77A7BAAB-B329-4918-8FFC-AD74F28E1CAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hookd.Domain", "Hookd.Domain\Hookd.Domain.csproj", "{614B531B-74C9-48CA-96A5-244972978043}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hookd.Persistence", "Hookd.Persistence\Hookd.Persistence.csproj", "{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{77A7BAAB-B329-4918-8FFC-AD74F28E1CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77A7BAAB-B329-4918-8FFC-AD74F28E1CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77A7BAAB-B329-4918-8FFC-AD74F28E1CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{614B531B-74C9-48CA-96A5-244972978043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{614B531B-74C9-48CA-96A5-244972978043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{614B531B-74C9-48CA-96A5-244972978043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{614B531B-74C9-48CA-96A5-244972978043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

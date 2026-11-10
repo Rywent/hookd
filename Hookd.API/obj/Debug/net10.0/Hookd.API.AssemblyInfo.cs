@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hookd.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63a363cec4de80bc3813c5d9b915d6ac254a6c77")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hookd.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hookd.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
