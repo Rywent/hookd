@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hookd.Domain", "Hookd.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hookd.Persistence", "Hookd.Persistence\Hookd.Persistence.csproj", "{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hookd.Application", "Hookd.Application\Hookd.Application.csproj", "{4025F4F7-877B-44F2-92B6-D1334408576C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED8EFA26-122B-4D32-8A5B-826B8B1C6CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4025F4F7-877B-44F2-92B6-D1334408576C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4025F4F7-877B-44F2-92B6-D1334408576C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4025F4F7-877B-44F2-92B6-D1334408576C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4025F4F7-877B-44F2-92B6-D1334408576C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
