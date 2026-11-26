@@ -24,25 +24,85 @@ Your backend submits delivery tasks through **Hookd's HTTP API**.
 **Task creation**
 
 ```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    darkMode: true
+    background: "#0b1426"
+    primaryColor: "#112d4e"
+    primaryTextColor: "#e6f0ff"
+    primaryBorderColor: "#386c9f"
+    secondaryColor: "#163d63"
+    secondaryTextColor: "#e6f0ff"
+    tertiaryColor: "#0e223b"
+    tertiaryTextColor: "#e6f0ff"
+    lineColor: "#6f9dcd"
+    textColor: "#e6f0ff"
+    edgeLabelBackground: "#112d4e"
+    fontFamily: "Arial, sans-serif"
+    fontSize: "14px"
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 36
+    rankSpacing: 44
+    padding: 18
+---
 flowchart LR
-    Backend[Your backend] --> API[Hookd API]
-    API --> Validate[Validate request]
+    Backend(Your backend) --> API(Hookd API)
+    API --> Validate(Validate request)
     Validate --> Database[(Save Pending task in PostgreSQL)]
+
+    classDef default fill:#112d4e,stroke:#386c9f,stroke-width:1.5px,color:#e6f0ff;
+    classDef storage fill:#163d63,stroke:#649bce,stroke-width:1.5px,color:#e6f0ff;
+    class Database storage;
 ```
 
 **Delivery**
 
 ```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    darkMode: true
+    background: "#0b1426"
+    primaryColor: "#112d4e"
+    primaryTextColor: "#e6f0ff"
+    primaryBorderColor: "#386c9f"
+    secondaryColor: "#163d63"
+    secondaryTextColor: "#e6f0ff"
+    tertiaryColor: "#0e223b"
+    tertiaryTextColor: "#e6f0ff"
+    lineColor: "#6f9dcd"
+    textColor: "#e6f0ff"
+    edgeLabelBackground: "#112d4e"
+    fontFamily: "Arial, sans-serif"
+    fontSize: "14px"
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 36
+    rankSpacing: 44
+    padding: 18
+---
 flowchart TD
-    Fetch[Load ready Pending or Retrying tasks] --> Attempt[Save InProgress and create attempt]
-    Attempt --> Send[Send webhook]
+    Fetch(Load ready Pending or Retrying tasks) --> Attempt(Save InProgress and create attempt)
+    Attempt --> Send(Send webhook)
     Send --> Success{HTTP 2xx?}
 
-    Success -->|Yes| Succeeded[Save Succeeded and attempt result]
+    Success -->|Yes| Succeeded(Save Succeeded and attempt result)
     Success -->|No| CanRetry{Can retry?}
-    CanRetry -->|Yes| Retry[Save Retrying, NextAttemptAt and attempt result]
-    CanRetry -->|No| Failed[Save Failed and attempt result]
+    CanRetry -->|Yes| Retry(Save Retrying, NextAttemptAt and attempt result)
+    CanRetry -->|No| Failed(Save Failed and attempt result)
     Retry -->|When due| Fetch
+
+    classDef default fill:#112d4e,stroke:#386c9f,stroke-width:1.5px,color:#e6f0ff;
+    classDef decision fill:#163d63,stroke:#649bce,stroke-width:1.5px,color:#e6f0ff;
+    classDef result fill:#183957,stroke:#527da5,stroke-width:1.5px,color:#e6f0ff;
+    class Success,CanRetry decision;
+    class Succeeded,Retry,Failed result;
 ```
 
 The worker processes ready tasks in batches. When no tasks are ready, it waits for the configured idle delay before checking again.
