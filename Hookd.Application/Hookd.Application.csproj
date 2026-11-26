@@ -8,7 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="17.0.0" />
+        <PackageReference Include="FluentValidation" Version="12.2.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.2.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="11.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\Hookd.Domain\Hookd.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Mapping\Webhook\" />
     </ItemGroup>
 
 </Project>
