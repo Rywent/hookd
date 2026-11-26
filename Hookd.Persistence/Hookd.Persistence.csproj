@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Hookd.Application\Hookd.Application.csproj" />
       <ProjectReference Include="..\Hookd.Domain\Hookd.Domain.csproj" />
     </ItemGroup>
 

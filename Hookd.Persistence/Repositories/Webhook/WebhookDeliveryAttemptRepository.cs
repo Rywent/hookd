@@ -38,7 +38,7 @@ public class WebhookDeliveryAttemptRepository(HookdDbContext dbContext) : IWebho
             return 0;
         }
 
-        // Copy scalar fields only; leave the parent task unchanged.
+        // Copy scalar fields only, leave the parent task unchanged.
         dbContext.Entry(existingAttempt).CurrentValues.SetValues(attempt);
         return 1;
     }
