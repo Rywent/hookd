@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+      <UserSecretsId>c28bcb1c-ab2b-40f2-a592-9f0c39e8f2c7</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
@@ -16,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Hookd.Application\Hookd.Application.csproj" />
+        <ProjectReference Include="..\Hookd.Persistence\Hookd.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>
