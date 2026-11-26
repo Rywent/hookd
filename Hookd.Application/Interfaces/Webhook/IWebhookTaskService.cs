@@ -9,7 +9,7 @@ public interface IWebhookTaskService
     Task<WebhookTaskResponse> GetByIdAsync(Guid id, CancellationToken ct = default);
     Task<IReadOnlyList<WebhookTaskResponse>> GetReadyToProcessAsync(int batchSize, CancellationToken ct = default);
 
-    Task ProcessTasksAsync(int batchSize, CancellationToken ct = default);
+    Task<int> ProcessTasksAsync(int batchSize, CancellationToken ct = default);
     Task<WebhookDeliveryResultResponse> SendWebhookAsync(WebhookTask webhookTask, CancellationToken ct = default);
     
     Task<WebhookTaskResponse> AddAsync(WebhookTaskAddRequest request, CancellationToken ct = default);

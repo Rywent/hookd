@@ -109,21 +109,27 @@ public class WebhookTaskService(IWebhookTaskRepository taskRepository, IWebhookD
 
 
     // Receives a batch and sequentially triggers the processing of each task.
-    public async Task ProcessTasksAsync(int batchSize, CancellationToken ct = default)
+    public async Task<int> ProcessTasksAsync(int batchSize, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
         DateTime now = ToDatabasePrecision(DateTime.UtcNow);
+        
+        int processedCount = 0;
+        
         var webhookTasks = await taskRepository.GetReadyToProcessAsync(batchSize, now, ct);
         
         if (webhookTasks.Count == 0)
         {
-            return;
+            return 0;
         }
 
         foreach (var webhookTask in webhookTasks)
         {
             await ProcessTaskAsync(webhookTask, ct);
+            processedCount++;
+            
         }
+        return processedCount;
     }
 
     private async Task ProcessTaskAsync(WebhookTask webhookTask, CancellationToken ct)

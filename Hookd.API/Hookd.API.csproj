@@ -18,4 +18,8 @@
         <ProjectReference Include="..\Hookd.Application\Hookd.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="BackgroundServices\webhook\" />
+    </ItemGroup>
+
 </Project>
