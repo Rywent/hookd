@@ -11,6 +11,9 @@
 *.sln.docstates
 *.env
 
+# JetBrains IDE settings
+.idea/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
