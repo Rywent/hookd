@@ -6,6 +6,8 @@ namespace Hookd.Persistence.Configurations.Webhook;
 
 public class WebhookTaskConfiguration : IEntityTypeConfiguration<WebhookTask>
 {
+    public const string IdempotencyKeyIndexName = "IX_WebhookTasks_IdempotencyKey";
+
     public void Configure(EntityTypeBuilder<WebhookTask> builder)
     {
         builder.HasKey(x => x.Id);
@@ -23,6 +25,14 @@ public class WebhookTaskConfiguration : IEntityTypeConfiguration<WebhookTask>
 
         builder.Property(x => x.Payload)
             .IsRequired();
+
+        builder.Property(x => x.ContentType)
+            .IsRequired()
+            .HasMaxLength(256)
+            .HasDefaultValue("application/json; charset=utf-8");
+
+        builder.Property(x => x.Headers)
+            .HasColumnType("jsonb");
 
         builder.Property(x => x.HttpMethod)
             .IsRequired()
@@ -43,6 +53,7 @@ public class WebhookTaskConfiguration : IEntityTypeConfiguration<WebhookTask>
             .HasConversion<string>();
         
         builder.HasIndex(x => x.IdempotencyKey)
+            .HasDatabaseName(IdempotencyKeyIndexName)
             .IsUnique()
             .HasFilter("\"IdempotencyKey\" IS NOT NULL");
         

@@ -10,6 +10,9 @@ public class WebhookTask
     
     public string TargetUrl { get; set; } = string.Empty;
     public string Payload { get; set; } = string.Empty;
+    public string ContentType { get; set; } = "application/json; charset=utf-8";
+
+    // Request headers stored as a JSON object.
     public string? Headers { get; set; }
 
     // Deduplication key for task creation.

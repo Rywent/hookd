@@ -33,6 +33,9 @@ public class WebhookDeliveryAttemptConfiguration : IEntityTypeConfiguration<Webh
 
         builder.Property(x => x.StartedAt)
             .IsRequired();
+
+        builder.Property(x => x.DurationMs)
+            .HasColumnType("double precision");
         
         builder.HasIndex(x => x.WebhookTaskId);
         

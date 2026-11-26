@@ -21,5 +21,5 @@ public class WebhookDeliveryAttempt
     public DateTime StartedAt { get; set; }
 
     public DateTime? FinishedAt { get; set; }
-    public int? DurationMs { get; set; }
+    public double? DurationMs { get; set; }
 }
