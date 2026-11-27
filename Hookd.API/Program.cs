@@ -1,5 +1,6 @@
 using FluentValidation;
 using Hookd.API.BackgroundServices;
+using Hookd.API.Extensions;
 using Hookd.API.Options;
 using Hookd.Application.Interfaces;
 using Hookd.Application.Interfaces.Webhook;
@@ -63,6 +64,9 @@ builder.Services.AddScoped<IUnitOfWork>(provider =>
 // background services
 builder.Services.AddHostedService<WebhookDeliveryBackgroundService>();
 
+// controllers
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -71,6 +75,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseGlobalExceptionHandler();
+
 app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.Run();
