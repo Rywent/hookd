@@ -1,3 +1,4 @@
+using Hookd.Domain.Enums.Webhook;
 using Hookd.Domain.Interfaces.Webhook;
 using Hookd.Domain.Models.Webhook;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,13 @@ namespace Hookd.Persistence.Repositories.Webhook;
 // Stores delivery attempts in the shared context. The caller saves changes.
 public class WebhookDeliveryAttemptRepository(HookdDbContext dbContext) : IWebhookDeliveryAttemptRepository
 {
+    public async Task<List<WebhookDeliveryAttempt>> GetUnfinishedForInProgressTasksAsync(CancellationToken ct = default)
+    {
+        return await dbContext.WebhookDeliveryAttempts
+            .Where(w => w.FinishedAt == null && w.WebhookTask.Status == HookStatus.InProgress)
+            .Include(w => w.WebhookTask)
+            .ToListAsync(ct);
+    }
     public async Task<WebhookDeliveryAttempt?> GetByIdAsync(Guid id, CancellationToken ct = default)
     {
         return await dbContext.WebhookDeliveryAttempts

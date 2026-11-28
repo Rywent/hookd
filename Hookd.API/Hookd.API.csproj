@@ -20,8 +20,4 @@
         <ProjectReference Include="..\Hookd.Persistence\Hookd.Persistence.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="BackgroundServices\webhook\" />
-    </ItemGroup>
-
 </Project>

@@ -8,7 +8,7 @@ namespace Hookd.API.Controllers;
 [Route("api/[controller]")]
 public class WebhookTasksController(IWebhookTaskService webhookTaskService) : ControllerBase
 {
-    // GET api/webhooktasks/id
+    // GET api/WebhookTasks/id
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<WebhookTaskResponse>> GetById(Guid id, CancellationToken ct = default)
     {

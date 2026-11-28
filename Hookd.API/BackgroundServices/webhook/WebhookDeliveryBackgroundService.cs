@@ -12,6 +12,8 @@ public class WebhookDeliveryBackgroundService(
     {
         var settings = options.Value;
 
+        await RecoverInterruptedTasksAsync(ct);
+        
         while (!ct.IsCancellationRequested)
         {
             var processedCount = await RunBatchAsync(settings.BatchSize, ct);
@@ -32,5 +34,15 @@ public class WebhookDeliveryBackgroundService(
         var processedCount = await service.ProcessTasksAsync(batchSize, ct);
         
         return processedCount;
+    }
+    
+    private async Task RecoverInterruptedTasksAsync(CancellationToken ct)
+    {
+        await using var scope = scopeFactory.CreateAsyncScope();
+
+        var service = scope.ServiceProvider
+            .GetRequiredService<IWebhookTaskService>();
+
+        await service.RecoverInterruptedTasksAsync(ct);
     }
 }

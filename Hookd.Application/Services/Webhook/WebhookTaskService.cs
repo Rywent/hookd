@@ -21,7 +21,54 @@ public class WebhookTaskService(IWebhookTaskRepository taskRepository, IWebhookD
     : IWebhookTaskService
 {
     private static readonly TimeSpan RetryDelay = TimeSpan.FromSeconds(30);
-    
+
+    public async Task RecoverInterruptedTasksAsync(CancellationToken ct = default)
+    {
+        ct.ThrowIfCancellationRequested();
+
+        var attempts = await deliveryAttemptRepository.GetUnfinishedForInProgressTasksAsync(ct);
+        if (attempts.Count == 0)
+        {
+            return;
+        }
+
+        var now = ToDatabasePrecision(DateTime.UtcNow);
+        const string errorMessage = "Delivery interrupted; outcome unknown.";
+
+        foreach (var attempt in attempts)
+        {
+            ct.ThrowIfCancellationRequested();
+            var webhookTask = attempt.WebhookTask;
+            
+            attempt.FinishedAt = now;
+            attempt.IsSuccess = false;
+            attempt.StatusCode = null;
+            attempt.DurationMs = null;
+            attempt.ResponseBody = null;
+            attempt.ErrorMessage = errorMessage;
+
+            webhookTask.UpdatedAt = now;
+            webhookTask.LastStatusCode = null;
+            webhookTask.LastResponseBody = null;
+            webhookTask.LastError = errorMessage;
+            webhookTask.SuccessAt = null;
+            webhookTask.FailureAt = null;
+            webhookTask.NextAttemptAt = null;
+
+            if (webhookTask.AttemptCount >= webhookTask.MaxAttempts)
+            {
+                webhookTask.Status = HookStatus.Failed;
+                webhookTask.FailureAt = now;
+            }
+            else
+            {
+                webhookTask.Status = HookStatus.Retrying;
+                webhookTask.NextAttemptAt = now.Add(RetryDelay);
+            }
+        }
+
+        await unitOfWork.SaveChangesAsync(ct);
+    }
     public async Task<WebhookTaskResponse> GetByIdAsync(Guid id, CancellationToken ct = default)
     {
         var webhookTask = await taskRepository.GetByIdAsync(id, ct);

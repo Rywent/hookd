@@ -6,6 +6,7 @@ namespace Hookd.Domain.Interfaces.Webhook;
 // UpdateAsync and DeleteAsync return 0 when missing, otherwise 1.
 public interface IWebhookDeliveryAttemptRepository
 {
+    Task<List<WebhookDeliveryAttempt>> GetUnfinishedForInProgressTasksAsync(CancellationToken ct = default);
     Task<WebhookDeliveryAttempt?> GetByIdAsync(Guid id, CancellationToken ct = default);
 
     // History is ordered by attempt number and returned without tracking.
